@@ -4,7 +4,7 @@ import { useInputStore } from '../../stores/inputStore'
 import styles from './InputPanel.module.scss'
 
 type InputPanelProps = {}
-export const InputPanel: React.VFC<InputPanelProps> = ({}) => {
+export const InputPanel: React.VFC<InputPanelProps> = () => {
   const [input, setInput] = useInputStore((s) => [s.input, s.setInput])
 
   const handleInputChange = useCallback<React.ChangeEventHandler<HTMLTextAreaElement>>(

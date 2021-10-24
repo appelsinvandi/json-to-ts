@@ -1,6 +1,4 @@
 import json5 from 'json5'
-import prettier from 'prettier'
-import prettierTypescriptPlugin from 'prettier/parser-typescript'
 import React from 'react'
 import shallow from 'zustand/shallow'
 
@@ -12,7 +10,7 @@ import { generateTypesFromTree } from '../../utils/typeTextUtils'
 import styles from './OutputPanel.module.scss'
 
 type OutputPanelProps = {}
-export const OutputPanel: React.VFC<OutputPanelProps> = ({}) => {
+export const OutputPanel: React.VFC<OutputPanelProps> = () => {
   const input = useInputStore((s) => s.input)
   const options = useOptionsStore((s) => s, shallow)
 
