@@ -1,7 +1,8 @@
 {
   "name": "json-to-ts",
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "dependencies": {
     "json5": "^2.2.0",
