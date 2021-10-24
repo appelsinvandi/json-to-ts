@@ -1,0 +1,50 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Restore yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
+          restore-keys: |
+            yarn-cache-folder-
+
+      - name: Install deps
+        run: yarn install --immutable
+
+      - name: Build
+        run: |
+          PUBLIC_URL="/json-to-ts" yarn build
+          mv build docs
+
+      - name: Add build to GH pages branch
+        run: |
+          git config --global user.name 'CI'
+          git config --global user.email 'appelsinvandi@users.noreply.github.com'
+          git checkout -B gh-pages
+          git add -f docs
+          git commit -m "Build"
+          git push origin gh-pages -f
