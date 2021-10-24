@@ -37,7 +37,7 @@ jobs:
 
       - name: Build
         run: |
-          PUBLIC_URL="/json-to-ts" yarn build
+          CI="false" PUBLIC_URL="/json-to-ts" yarn build
           mv build docs
 
       - name: Add build to GH pages branch

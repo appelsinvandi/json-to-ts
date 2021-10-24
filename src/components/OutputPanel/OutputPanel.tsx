@@ -1,4 +1,6 @@
 import json5 from 'json5'
+import prettier from 'prettier'
+import prettierTypescriptPlugin from 'prettier/parser-typescript'
 import React from 'react'
 import shallow from 'zustand/shallow'
 
@@ -29,7 +31,10 @@ function generateTypes(input: string, options: ReturnType<typeof useOptionsStore
     console.log(typeTree)
     const types = generateTypesFromTree(typeTree, options)
     console.log(types)
-    const formattedTypes = 'type Root = ' + types
+    const formattedTypes = prettier.format('type Root = ' + types, {
+      parser: 'typescript',
+      plugins: [prettierTypescriptPlugin],
+    })
 
     return formattedTypes
   } catch (e) {
