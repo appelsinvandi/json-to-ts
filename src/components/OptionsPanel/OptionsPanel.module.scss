@@ -1,0 +1,8 @@
+.root {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+
+  border-right: 1px solid grey;
+  height: 100%;
+}
