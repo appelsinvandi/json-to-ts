@@ -14,7 +14,7 @@ export function generateTypesFromTree(
         '{' +
         tree.children
           .sort(({ key: a }, { key: b }) => compareStringsAlphanum(a, b))
-          .map(({ key, type, optional }) => [key, generateTypesFromTree(type, options)].join(optional ? '?: ' : ': '))
+          .map(({ key, type, optional }) => ["'" + key + "'", generateTypesFromTree(type, options)].join(optional ? '?: ' : ': '))
           .join('; ') +
         '}'
       )
